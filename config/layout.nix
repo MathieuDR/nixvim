@@ -37,7 +37,7 @@
       };
       indent-blankline = {
         enable = true;
-        indent.char = "┆";
+        settings.indent.char = "┆";
       };
     };
   };

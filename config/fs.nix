@@ -1,6 +1,6 @@
 {
   config.plugins = {
-    oil.enable = true;
+    oil.settings.enable = true;
     neo-tree = {
       enable = true;
       eventHandlers = {

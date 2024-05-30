@@ -3,7 +3,7 @@
     # THEME
     colorschemes.catppuccin = {
       enable = true;
-      flavour = "mocha";
+      settings.flavour = "mocha";
     };
 
     # GLOBALS
@@ -15,7 +15,7 @@
     # BASE OPTIONS
     # TODO: CHECK IF `vim.o` and `vim.wo` is much different then vim.opts.
     # TODO: https://www.youtube.com/watch?v=Cp0iap9u29c
-    options = {
+    opts = {
       number = true;
       relativenumber = true;
       hlsearch = true;

@@ -67,10 +67,13 @@
       treesitter-context.enable = true;
 
       ## Auto complete
-      nvim-cmp = {
+      cmp.settings = {
         enable = true;
-        snippet.expand = "luasnip";
-        mappingPresets = [ "insert" ];
+        #TODO check if this is good enough
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+        #snippet.expand = "luasnip";
+        #TODO
+        #mappingPresets = [ "insert" ];
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
           "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -114,13 +117,14 @@
           };
         };
         autoEnableSources = true;
-        sources = [
-          { name = "nvim_lsp"; }
-          { name = "luasnip"; }
-          { name = "buffer"; }
-          { name = "path"; }
-          { name = "cmdline"; }
-        ];
+        #TODO
+        #sources = [
+        #  { name = "nvim_lsp"; }
+        #  { name = "luasnip"; }
+        #  { name = "buffer"; }
+        #  { name = "path"; }
+        #  { name = "cmdline"; }
+        #];
       };
 
       luasnip = {

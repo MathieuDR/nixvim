@@ -1,6 +1,6 @@
 {
   config.plugins = {
-    comment-nvim.enable = true;
+    comment.enable = true;
     todo-comments = {
       enable = true;
       keywords = {
