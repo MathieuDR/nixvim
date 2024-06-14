@@ -119,6 +119,7 @@
       };
 
       cmp_luasnip.enable = true;
+      cmp-nvim-lsp.enable = true;
 
       luasnip = {
         enable = true;
