@@ -73,7 +73,6 @@
             	require('luasnip').lsp_expand(args.body)
             end
           '';
-          # mappingPresets = ["insert"];
           mapping = {
             "<C-n>" = "cmp.mapping.select_next_item()";
             "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -85,8 +84,8 @@
                 cmp.mapping(function(fallback)
                 	if cmp.visible() then
                 		cmp.select_next_item()
-                	elseif luasnip.expand_or_locally_jumpable() then
-                		luasnip.expand_or_jump()
+                	elseif require('luasnip').expand_or_locally_jumpable() then
+                		require('luasnip').expand_or_jump()
                 	else
                 		fallback()
                 	end
@@ -96,8 +95,8 @@
 								cmp.mapping(function(fallback)
                 	if cmp.visible() then
                 		cmp.select_prev_item()
-                	elseif luasnip.locally_jumpable(-1) then
-                		luasnip.jump(-1)
+                	elseif require('luasnip').locally_jumpable(-1) then
+                		require('luasnip').jump(-1)
                 	else
                 		fallback()
                 	end
@@ -126,7 +125,7 @@
         fromVscode = [{}];
       };
 
-      # friendly-snippets.enable = true;
+      friendly-snippets.enable = true;
 
       ### LSP
       fidget.enable = true;
