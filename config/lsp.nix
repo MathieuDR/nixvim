@@ -1,11 +1,10 @@
-{ lexicalPackage, ... }:
-{
+{lexicalPackage, ...}: {
   config = {
     plugins = {
       ## Treesitter
       treesitter = {
         enable = true;
-        ensureInstalled = [ "bash" "bibtex" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "dot" "eex" "elixir" "erlang" "fish" "fsh" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "latex" "lua" "nix" "regex" "ruby" "scss" "sql" "terraform" "typescript" "vimdoc" "vim" "xml" "yaml" "markdown" "markdown_inline" ];
+        ensureInstalled = ["bash" "bibtex" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "dot" "eex" "elixir" "erlang" "fish" "fsh" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "latex" "lua" "nix" "regex" "ruby" "scss" "sql" "terraform" "typescript" "vimdoc" "vim" "xml" "yaml" "markdown" "markdown_inline"];
         indent = true;
         incrementalSelection = {
           enable = true;
@@ -63,17 +62,17 @@
         };
       };
 
-
       treesitter-context.enable = true;
 
       ## Auto complete
       cmp.settings = {
         enable = true;
-        #TODO check if this is good enough
-        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
-        #snippet.expand = "luasnip";
-        #TODO
-        #mappingPresets = [ "insert" ];
+        snippet.expand = ''
+          function(args)
+          	require('luasnip').lsp_expand(args.body)
+          end
+        '';
+        mappingPresets = ["insert"];
         mapping = {
           "<C-n>" = "cmp.mapping.select_next_item()";
           "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -83,16 +82,16 @@
           "<C-CR>" = "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true})";
           "<Tab>" = {
             action = ''
-              						function(fallback)
-              							if cmp.visible() then
-              								cmp.select_next_item()
-              							elseif luasnip.expand_or_locally_jumpable() then
-              								luasnip.expand_or_jump()
-              							else
-              								fallback()
-              							end
-              						end
-              						'';
+              function(fallback)
+              	if cmp.visible() then
+              		cmp.select_next_item()
+              	elseif luasnip.expand_or_locally_jumpable() then
+              		luasnip.expand_or_jump()
+              	else
+              		fallback()
+              	end
+              end
+            '';
             modes = [
               "i"
               "s"
@@ -100,16 +99,16 @@
           };
           "<S-Tab>" = {
             action = ''
-              						function(fallback)
-              							if cmp.visible() then
-              								cmp.select_prev_item()
-              							elseif luasnip.locally_jumpable(-1) then
-              								luasnip.jump(-1)
-              							else
-              								fallback()
-              							end
-              						end
-              						'';
+              function(fallback)
+              	if cmp.visible() then
+              		cmp.select_prev_item()
+              	elseif luasnip.locally_jumpable(-1) then
+              		luasnip.jump(-1)
+              	else
+              		fallback()
+              	end
+              end
+            '';
             modes = [
               "i"
               "s"
@@ -117,19 +116,18 @@
           };
         };
         autoEnableSources = true;
-        #TODO
-        #sources = [
-        #  { name = "nvim_lsp"; }
-        #  { name = "luasnip"; }
-        #  { name = "buffer"; }
-        #  { name = "path"; }
-        #  { name = "cmdline"; }
-        #];
+        sources = [
+          {name = "nvim_lsp";}
+          {name = "luasnip";}
+          {name = "buffer";}
+          {name = "path";}
+          {name = "cmdline";}
+        ];
       };
 
       luasnip = {
         enable = true;
-        fromVscode = [{ }];
+        fromVscode = [{}];
       };
 
       friendly-snippets.enable = true;
@@ -152,7 +150,7 @@
           dartls.enable = true;
           elixirls = {
             enable = true;
-            cmd = [ "${lexicalPackage}/bin/lexical" ];
+            cmd = ["${lexicalPackage}/bin/lexical"];
           };
         };
         keymaps = {
