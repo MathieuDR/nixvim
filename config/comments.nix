@@ -7,7 +7,7 @@
         FIX = {
           icon = " ";
           color = "error";
-          alt = [ "FIXME" "BUG" "fixme" "fixdocs" "ISSUE" ];
+          alt = ["FIXME" "BUG" "fixme" "fixdocs" "ISSUE"];
         };
       };
     };
@@ -18,10 +18,10 @@
       mode = "n";
       key = "]t";
       action.__raw = ''
-        			function()
-        				require("todo-comments").jump_next()
-        			end
-        			'';
+        function()
+        	require("todo-comments").jump_next()
+        end
+      '';
       options = {
         desc = "Next todo comment";
       };
@@ -30,10 +30,10 @@
       mode = "n";
       key = "[t";
       action.__raw = ''
-        			function()
-        				require("todo-comments").jump_prev()
-        			end
-        			'';
+        function()
+        	require("todo-comments").jump_prev()
+        end
+      '';
       options = {
         desc = "Previous todo comment";
       };
@@ -54,6 +54,5 @@
         desc = "[T]elescope [C]omments";
       };
     }
-
   ];
 }

@@ -5,10 +5,10 @@
       enable = true;
       eventHandlers = {
         file_opened = ''
-          				function()
-          					vim.cmd.NeoTree("close")
-          				end
-          			'';
+          function()
+          	vim.cmd.NeoTree("close")
+          end
+        '';
       };
     };
   };

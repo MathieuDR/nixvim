@@ -34,7 +34,7 @@
       };
     }
 
-    # COMMON 
+    # COMMON
     {
       mode = "n";
       key = "<leader>?";

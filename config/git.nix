@@ -11,7 +11,7 @@
           topdelete.text = "‾";
           changedelete.text = "~";
         };
-      on_attach = ''
+        on_attach = ''
           function(bufnr)
           	vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           		{ buffer = bufnr, desc = '[G]o to [P]revious Hunk' })

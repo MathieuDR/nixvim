@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   config = {
     extraPlugins = with pkgs.vimPlugins; [
       vim-easy-align

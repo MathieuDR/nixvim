@@ -1,7 +1,7 @@
 {
   config.keymaps = [
     {
-      mode = [ "n" "v" ];
+      mode = ["n" "v"];
       key = "<space>";
       action = "<Nop>";
       options = {
@@ -9,7 +9,7 @@
       };
     }
     {
-      mode = [ "n" "v" ];
+      mode = ["n" "v"];
       key = "<leader>cs";
       action = ":noh<CR>";
       options = {
