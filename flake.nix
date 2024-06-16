@@ -1,7 +1,7 @@
 {
   description = "NeoVim configuration using Nixvim";
 
-inputs = {
+  inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixvim.url = "github:nix-community/nixvim";
     lexical.url = "github:lexical-lsp/lexical";
