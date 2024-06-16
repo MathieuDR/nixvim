@@ -4,7 +4,7 @@
       ## Treesitter
       treesitter = {
         enable = true;
-        ensureInstalled = ["bash" "bibtex" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "dot" "eex" "elixir" "erlang" "fish" "fsh" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "latex" "lua" "nix" "regex" "ruby" "scss" "sql" "terraform" "typescript" "vimdoc" "vim" "xml" "yaml" "markdown" "markdown_inline"];
+        ensureInstalled = ["bash" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "eex" "elixir" "erlang" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "lua" "nix" "regex" "ruby" "scss" "terraform" "xml" "yaml" "markdown" "markdown_inline"];
         indent = true;
         incrementalSelection = {
           enable = true;
@@ -148,6 +148,12 @@
             cmd = ["${lexicalPackage}/bin/lexical"];
           };
         };
+        onAttach = ''
+          -- Create a command `:Format` local to the LSP buffer
+          vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+          	vim.lsp.buf.format()
+          end, { desc = 'Format current buffer with LSP' })
+        '';
         keymaps = {
           diagnostic = {
             "[d" = {
