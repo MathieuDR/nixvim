@@ -129,6 +129,13 @@
 
       ### LSP
       fidget.enable = true;
+			lsp-format.enable = true;
+
+			none-ls = {
+				enable = true;
+				enableLspFormat = true;
+				sources.formatting.alejandra.enable = true;
+			};
 
       lsp = {
         enable = true;

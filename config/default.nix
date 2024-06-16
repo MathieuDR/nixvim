@@ -9,7 +9,7 @@
     ./helpers.nix
     (import ./lsp.nix {inherit lexicalPackage;})
     (import ./custom-packages.nix {inherit pkgs;})
-    ./autoformat.nix
+    # ./autoformat.nix
     ./git.nix
     ./whichkey.nix
     ./fs.nix
