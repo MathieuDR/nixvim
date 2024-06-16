@@ -6,7 +6,7 @@
       eventHandlers = {
         file_opened = ''
           function()
-          	vim.cmd.NeoTree("close")
+          	require("neo-tree").close_all()
           end
         '';
       };
