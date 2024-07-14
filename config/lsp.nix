@@ -4,15 +4,17 @@
       ## Treesitter
       treesitter = {
         enable = true;
-        ensureInstalled = ["bash" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "eex" "elixir" "erlang" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "lua" "nix" "regex" "ruby" "scss" "terraform" "xml" "yaml" "markdown" "markdown_inline"];
-        indent = true;
-        incrementalSelection = {
-          enable = true;
-          keymaps = {
-            initSelection = "<c-space>";
-            nodeDecremental = "<M-space>";
-            nodeIncremental = "<c-space>";
-            scopeIncremental = "<c-s>";
+        settings = {
+          ensureInstalled = ["bash" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "eex" "elixir" "erlang" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "lua" "nix" "regex" "ruby" "scss" "terraform" "xml" "yaml" "markdown" "markdown_inline"];
+          indent.enable = true;
+          incremental_selection = {
+            enable = true;
+            keymaps = {
+              init_selection = "<c-space>";
+              node_decremental = "<M-space>";
+              node_incremental = "<c-space>";
+              scope_incremental = "<c-s>";
+            };
           };
         };
       };
