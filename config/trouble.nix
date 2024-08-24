@@ -3,7 +3,7 @@
     trouble = {
       enable = true;
       settings = {
-        icons = true;
+        # icons = true;
         signs = {
           error = "";
           warning = "";
@@ -19,73 +19,57 @@
     {
       mode = "n";
       key = "<leader>tt";
-      action = "<cmd>TroubleToggle<CR>";
+      action = "<cmd>trouble diagnostics toggle focus=false filter.buf=0<CR>";
       options = {
-        desc = "[T]rouble [T]oggle";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>tr";
-      action = "<cmd>TroubleRefresh<CR>";
-      options = {
-        desc = "[T]rouble [R]efresh";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>tw";
-      action.__raw = "function() require('trouble').toggle('workspace_diagnostic') end";
-      options = {
-        desc = "[T]rouble [W]orkspace diagnostic";
+        desc = "[T]rouble [T]oggle Diagnostics";
       };
     }
     {
       mode = "n";
       key = "<leader>td";
-      action.__raw = "function() require('trouble').toggle('document_diagnostics') end";
+      action = "<cmd>trouble symbols toggle<CR>";
       options = {
-        desc = "[T]rouble [D]ocument diagnostic";
+        desc = "[T]rouble [D]ocument Symbols";
       };
     }
     {
       mode = "n";
-      key = "<leader>tq";
-      action.__raw = "function() require('trouble').toggle('quickfix') end";
+      key = "<leader>tf";
+      action = "<cmd>trouble fuzzy toggle<CR>";
       options = {
-        desc = "[T]rouble [Q]uickfix";
+        desc = "[T]rouble Tele[S]cope";
       };
     }
     {
       mode = "n";
-      key = "<leader>tL";
-      action.__raw = "function() require('trouble').toggle('loclist') end";
+      key = "<leader>ts";
+      action = "<cmd>trouble telescope toggle<CR>";
       options = {
-        desc = "[T]rouble [L]ocallist";
+        desc = "[T]rouble Tele[S]cope";
+      };
+    }
+    {
+      mode = "n";
+      key = "<leader>tv";
+      action = "<cmd>trouble lsp toggle focus=false filter.buf=0<CR>";
+      options = {
+        desc = "[T]rouble Lsp, current buffer";
       };
     }
     {
       mode = "n";
       key = "<leader>tl";
-      action.__raw = "function() require('trouble').toggle('lsp_references') end";
+      action = "<cmd>trouble lsp toggle focus=false<CR>";
       options = {
-        desc = "[T]rouble [L]sp references";
+        desc = "[T]rouble [L]sp";
       };
     }
     {
       mode = "n";
-      key = "<leader>tn";
-      action.__raw = "function() require('trouble').next({skip_groups = true, jump = true}) end";
+      key = "<leader>tq";
+      action = "<cmd>trouble qflist toggle focus=false<CR>";
       options = {
-        desc = "[T]rouble [N]ext";
-      };
-    }
-    {
-      mode = "n";
-      key = "<leader>tp";
-      action.__raw = "function() require('trouble').previous({skip_groups = true, jump = true}) end";
-      options = {
-        desc = "[T]rouble [N]ext";
+        desc = "[T]rouble [Q]uickfix";
       };
     }
   ];
