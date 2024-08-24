@@ -32,6 +32,8 @@
       termguicolors = true;
       spelllang = "en_gb";
       spell = true;
+      smartindent = true;
+      expandtab = true;
       tabstop = 2;
       shiftwidth = 2;
     };
