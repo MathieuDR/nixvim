@@ -2,8 +2,22 @@
   config.plugins.markview = {
     enable = true;
     settings = {
-      hybrid_modes = ["i"];
-      mode = ["n" "no" "i"];
+      mode = ["n" "no" "c"];
+
+      callback = {
+        on_disable = ''
+          function(buf, win)
+              vim.wo[window].conceallevel = 0;
+              vim.wo[window].concealcursor = "";
+          end
+        '';
+        on_enable = ''
+          function(buf, win)
+            vim.wo[window].conceallevel = 2;
+            vim.wo[window].concealcursor = "nc";
+          end
+        '';
+      };
     };
   };
 
@@ -11,9 +25,9 @@
     {
       mode = "n";
       key = "<leader>mt";
-      action = ":Markview toggleAll<CR>";
+      action = ":Markview toggle<CR>";
       options = {
-        desc = "[M]arkview [T]oggle all";
+        desc = "[M]arkview [T]oggle";
       };
     }
   ];

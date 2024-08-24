@@ -48,10 +48,18 @@
     }
     {
       mode = "n";
+      key = "<leader>sfm";
+      action = ":TodoTelescope keywords=FIXME,FIX,fixme,fixdocs,BUG<CR>";
+      options = {
+        desc = "Tele[S]cope [F]ix[M]e";
+      };
+    }
+    {
+      mode = "n";
       key = "<leader>sc";
       action = ":TodoTelescope<CR>";
       options = {
-        desc = "[T]elescope [C]omments";
+        desc = "Tele[S]cope [C]omments";
       };
     }
   ];

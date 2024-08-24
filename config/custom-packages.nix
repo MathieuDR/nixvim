@@ -3,7 +3,6 @@
     extraPlugins = with pkgs.vimPlugins; [
       vim-easy-align
       executor-nvim
-      vim-markdown # Not nvim-markdown but suffices for now
       nvim-surround
       telescope-symbols-nvim
     ];
@@ -11,8 +10,6 @@
     extraConfigLuaPost = ''
       require("executor").setup({})
       require("nvim-surround").setup({})
-
-      vim.g.vim_markdown_conceal = 0
     '';
 
     keymaps = [
