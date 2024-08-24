@@ -3,7 +3,7 @@
     comment.enable = true;
     todo-comments = {
       enable = true;
-      keywords = {
+      settings.keywords = {
         FIX = {
           icon = " ";
           color = "error";

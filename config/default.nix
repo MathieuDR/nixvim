@@ -14,6 +14,7 @@
     ./whichkey.nix
     ./fs.nix
     ./comments.nix
+    ./undotree.nix
     ./telescope.nix
     ./trouble.nix
     ./ufo.nix

@@ -142,6 +142,10 @@
 
       lsp = {
         enable = true;
+        capabilities = {
+          textDocument.foldingRange.dynamicRegistration = false;
+          textDocument.foldingRange.lineFoldingOnly = true;
+        };
         servers = {
           bashls.enable = true;
           dockerls.enable = true;
