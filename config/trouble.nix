@@ -1,18 +1,7 @@
 {
   config.plugins = {
-    trouble = {
-      enable = true;
-      settings = {
-        # icons = true;
-        signs = {
-          error = "";
-          warning = "";
-          hint = "";
-          information = "";
-          other = "";
-        };
-      };
-    };
+    web-devicons.enable = true;
+    trouble.enable = true;
   };
 
   config.keymaps = [
