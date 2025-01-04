@@ -1,4 +1,4 @@
-{lexicalPackage, ...}: {
+{pkgs, ...}: {
   config = {
     plugins = {
       ## Treesitter
@@ -161,7 +161,7 @@
           dartls.enable = true;
           elixirls = {
             enable = true;
-            cmd = ["${lexicalPackage}/bin/lexical"];
+            cmd = ["${pkgs.lexical}/bin/lexical"];
           };
         };
         onAttach = ''
