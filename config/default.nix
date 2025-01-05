@@ -1,9 +1,13 @@
-{pkgs, ...}: {
+{
+  lexicalPackage,
+  pkgs,
+  ...
+}: {
   imports = [
     ./base.nix
     ./keymaps.nix
     ./helpers.nix
-    (import ./lsp.nix {inherit pkgs;})
+    (import ./lsp.nix {inherit lexicalPackage pkgs;})
     (import ./custom-packages.nix {inherit pkgs;})
     # ./autoformat.nix
     ./git.nix

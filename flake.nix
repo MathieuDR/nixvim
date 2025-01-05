@@ -13,11 +13,17 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lexical = {
+      url = "github:lexical-lsp/lexical";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     nixpkgs,
     nixvim,
+    lexical,
     flake-parts,
     ...
   } @ inputs:
@@ -31,14 +37,18 @@
       }: let
         nixvimLib = nixvim.lib.${system};
         nixvim' = nixvim.legacyPackages.${system};
+        lexicalPackage = lexical.packages.${system}.default.override {
+          elixir = pkgs.beam.packages.erlang_26.elixir_1_17;
+        };
         nvim = nixvim'.makeNixvimWithModule {
           inherit pkgs;
-          module = import ./config {inherit pkgs;};
+          module = import ./config {inherit lexicalPackage pkgs;};
         };
       in {
         packages = {
           # Lets you run `nix run .` to start nixvim
           default = nvim;
+          inherit lexicalPackage;
         };
 
         formatter = pkgs.alejandra;
