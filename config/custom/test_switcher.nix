@@ -70,7 +70,7 @@
           vim.notify("File doesn't match expected source or test patterns for " .. filetype, vim.log.levels.WARN)
         end
       '';
-      option = {
+      options = {
         desc = "[S]witch between [T]est/Source files";
         silent = true;
         noremap = true;

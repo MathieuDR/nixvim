@@ -1,5 +1,5 @@
 {...}: {
   imports = [
-    ./testswitcher.nix
+    ./test_switcher.nix
   ];
 }
