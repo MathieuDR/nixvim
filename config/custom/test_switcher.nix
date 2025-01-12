@@ -5,6 +5,23 @@
       key = "<leader>st";
       action.__raw = ''
         function()
+          -- Function to set up the autocommand for the new buffer
+          local function setup_mkdir_autocmd()
+            local bufnr = vim.api.nvim_get_current_buf()
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = bufnr,  -- Make it buffer-local
+              once = true,     -- Only trigger once
+              callback = function()
+                local dir = vim.fn.expand("<afile>:p:h")
+                if vim.fn.isdirectory(dir) == 0 then
+                  vim.fn.mkdir(dir, "p")
+                  vim.notify("Created directory: " .. dir, vim.log.levels.INFO)
+                end
+              end,
+              desc = "Create directory structure on first save"
+            })
+          end
+
           local current_file = vim.fn.expand('%:p')
           local filetype = vim.bo.filetype
 
@@ -54,6 +71,7 @@
             -- We're in a source file, switch to test
             local test_file = string.format(lang_pattern.test_template, root, path)
             vim.cmd('edit ' .. test_file)
+            setup_mkdir_autocmd()
             return
           end
 
