@@ -20,5 +20,6 @@
     ./markview.nix
     ./ufo.nix
     ./layout.nix
+    ./custom
   ];
 }
