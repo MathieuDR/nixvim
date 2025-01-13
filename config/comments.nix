@@ -48,10 +48,10 @@
     }
     {
       mode = "n";
-      key = "<leader>sfm";
+      key = "<leader>sn";
       action = ":TodoTelescope keywords=FIXME,FIX,fixme,fixdocs,BUG<CR>";
       options = {
-        desc = "Tele[S]cope [F]ix[M]e";
+        desc = "Tele[S]cope FixMe [N]otes";
       };
     }
     {
