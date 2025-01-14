@@ -3,7 +3,12 @@
     # THEME
     colorschemes.catppuccin = {
       enable = true;
-      settings.flavour = "mocha";
+      settings = {
+        flavour = "mocha";
+        integrations = {
+          neotest = true;
+        };
+      };
     };
 
     # GLOBALS
