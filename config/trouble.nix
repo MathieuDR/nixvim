@@ -21,14 +21,14 @@
         desc = "[T]rouble [D]ocument Symbols";
       };
     }
-    {
-      mode = "n";
-      key = "<leader>tf";
-      action = "<cmd>Trouble fuzzy toggle<CR>";
-      options = {
-        desc = "[T]rouble Tele[S]cope";
-      };
-    }
+    # {
+    #   mode = "n";
+    #   key = "<leader>tf";
+    #   action = "<cmd>Trouble fuzzy toggle<CR>";
+    #   options = {
+    #     desc = "[T]rouble Tele[S]cope";
+    #   };
+    # }
     {
       mode = "n";
       key = "<leader>ts";

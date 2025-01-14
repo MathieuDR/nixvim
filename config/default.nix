@@ -20,6 +20,8 @@
     ./markview.nix
     ./ufo.nix
     ./layout.nix
+    ./autopair.nix
+    ./neotest.nix
     ./custom
   ];
 }
