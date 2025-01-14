@@ -29,14 +29,14 @@
     #     desc = "[T]rouble Tele[S]cope";
     #   };
     # }
-    {
-      mode = "n";
-      key = "<leader>ts";
-      action = "<cmd>Trouble telescope toggle<CR>";
-      options = {
-        desc = "[T]rouble Tele[S]cope";
-      };
-    }
+    # {
+    #   mode = "n";
+    #   key = "<leader>ts";
+    #   action = "<cmd>Trouble telescope toggle<CR>";
+    #   options = {
+    #     desc = "[T]rouble Tele[S]cope";
+    #   };
+    # }
     {
       mode = "n";
       key = "<leader>tv";
