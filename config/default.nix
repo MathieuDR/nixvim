@@ -17,7 +17,8 @@
     ./undotree.nix
     ./telescope.nix
     ./trouble.nix
-    ./markview.nix
+    # ./markview.nix
+    ./obsidian.nix
     ./ufo.nix
     ./layout.nix
     ./autopair.nix

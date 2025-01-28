@@ -39,7 +39,7 @@
         nixvim' = nixvim.legacyPackages.${system};
         lexicalPackage =
           (pkgs.lexical.override {
-            elixir = pkgs.beam.packages.erlang_27.elixir_1_17;
+            elixir = pkgs.beam.packages.erlang_25.elixir_1_15;
           })
           .overrideAttrs (old: {
             # Remove the postInstall since we're using preFixup
