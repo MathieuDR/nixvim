@@ -36,6 +36,14 @@
     # BUFFERS / FILES
     {
       mode = "n";
+      key = "<leader>m";
+      action.__raw = "require('telescope.builtin').marks";
+      options = {
+        desc = "Find [M]arks";
+      };
+    }
+    {
+      mode = "n";
       key = "<leader>?";
       action.__raw = "require('telescope.builtin').oldfiles";
       options = {
