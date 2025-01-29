@@ -17,7 +17,7 @@
     ./undotree.nix
     ./telescope.nix
     ./trouble.nix
-    # ./markview.nix
+    ./render-markdown.nix
     ./obsidian.nix
     ./ufo.nix
     ./layout.nix
