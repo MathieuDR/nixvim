@@ -4,7 +4,7 @@
     settings = {
       latex.enabled = false;
       checkbox.custom = {
-        todo = null;
+        todo.raw = "[todo]";
 
         important = {
           raw = "[!]";
