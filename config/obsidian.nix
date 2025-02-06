@@ -89,6 +89,7 @@
             img_folder = "assets/img";
           };
 
+          # Generate Zettelkasten-style IDs (YYMMDD-title format)
           note_id_func = ''
             function(title)
               local suffix = ""
@@ -105,27 +106,6 @@
             end
           '';
 
-          note_path_func = ''
-            function(spec)
-              -- Check if there's a path specified in the metadata
-              local template_path = spec.metadata and spec.metadata.path
-
-              local target_dir
-              if template_path then
-                -- If template specified a path, use it
-                target_dir = vim.fn.expand(spec.dir / template_path)
-                -- Remove the path from metadata since we don't want it in the final note
-                spec.metadata.path = nil
-              else
-                -- Default to root directory if no path specified
-                target_dir = spec.dir
-              end
-
-              -- Return the full path with the note ID
-              return target_dir / (spec.id .. ".md")
-            end
-          '';
-
           note_frontmatter_func = ''
             function(note)
               if note.title then
@@ -134,13 +114,14 @@
 
               local out = {
                 id = note.id,
+                title = note.title,
                 created = os.date("%Y-%m-%d %H:%M"),
                 modified = os.date("%Y-%m-%d %H:%M"),
                 aliases = note.aliases,
-                tags = note.tags or {},
+                tags = note.tags
               }
 
-              -- Keep any additional metadata except 'path'
+              -- Preserve any existing metadata
               if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
                 for k, v in pairs(note.metadata) do
                   if k ~= "path" and k ~="modified" then  -- Skip the path since we already handled it
@@ -150,6 +131,32 @@
               end
 
               return out
+            end
+          '';
+
+          #Register callbacks for note organization
+          callbacks.pre_write_note = ''
+            function(client, note)
+              -- Skip if no metadata or path
+              if not note.metadata or not note.metadata.path then
+                return
+              end
+
+              -- Get the specified path from metadata
+              local target_dir = note.metadata.path
+
+              -- Construct the new path
+              local new_path = client.dir / target_dir / note.path.name
+
+              if note.path:exists() then
+                note.path:rename(new_path)
+              end
+
+              -- Update the note's path
+              note.path = new_path
+
+              -- Remove path from metadata
+              note.metadata.path = nil
             end
           '';
 
@@ -170,9 +177,6 @@
             {
               name = "personal";
               path = "~/notes/Obsidian";
-              overrides = {
-                notes_subdir = "slips";
-              };
             }
           ];
         };
