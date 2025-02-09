@@ -135,6 +135,7 @@
               local out = {
                 id = note.id,
                 created = os.date("%Y-%m-%d %H:%M"),
+                modified = os.date("%Y-%m-%d %H:%M"),
                 aliases = note.aliases,
                 tags = note.tags or {},
               }
@@ -142,7 +143,7 @@
               -- Keep any additional metadata except 'path'
               if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
                 for k, v in pairs(note.metadata) do
-                  if k ~= "path" then  -- Skip the path since we already handled it
+                  if k ~= "path" or k ~="modified" then  -- Skip the path since we already handled it
                     out[k] = v
                   end
                 end
