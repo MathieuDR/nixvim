@@ -22,7 +22,7 @@
     ./ufo.nix
     ./layout.nix
     ./autopair.nix
-    ./neotest.nix
+    # ./neotest.nix
     ./custom
   ];
 }
