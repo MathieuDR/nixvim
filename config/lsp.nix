@@ -6,7 +6,7 @@
         enable = true;
         settings = {
           highlight.enable = true;
-          ensureInstalled = ["bash" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "eex" "elixir" "erlang" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "lua" "nix" "regex" "ruby" "scss" "terraform" "xml" "yaml" "markdown" "markdown_inline"];
+          ensureInstalled = ["go" "bash" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "eex" "elixir" "erlang" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "lua" "nix" "regex" "ruby" "scss" "terraform" "xml" "yaml" "markdown" "markdown_inline"];
           indent.enable = true;
           incremental_selection = {
             enable = true;
