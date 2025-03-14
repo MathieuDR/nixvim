@@ -159,6 +159,7 @@
           html.enable = true;
           jsonls.enable = true;
           dartls.enable = true;
+          gopls.enable = true;
           typst_lsp.enable = false;
           lexical = {
             enable = true;
