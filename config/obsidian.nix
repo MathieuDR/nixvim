@@ -76,9 +76,10 @@
 
     plugins = {
       image = {
-        enable = true;
+        enable = false;
         backend = "kitty";
       };
+
       which-key.settings.spec = [
         {
           __unkeyed = "<leader>o";
