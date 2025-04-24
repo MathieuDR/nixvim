@@ -77,7 +77,7 @@
     plugins = {
       image = {
         enable = false;
-        backend = "kitty";
+        settings.backend = "kitty";
       };
 
       which-key.settings.spec = [
