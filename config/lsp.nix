@@ -6,7 +6,44 @@
         enable = true;
         settings = {
           highlight.enable = true;
-          ensureInstalled = ["go" "bash" "c_sharp" "cmake" "css" "csv" "dart" "diff" "dockerfile" "eex" "elixir" "erlang" "gitignore" "heex" "http" "hurl" "html" "ini" "javascript" "jg" "json" "lua" "nix" "regex" "ruby" "scss" "terraform" "xml" "yaml" "markdown" "markdown_inline"];
+          ensureInstalled = [
+            "go"
+            "bash"
+            "c_sharp"
+            "cmake"
+            "css"
+            "csv"
+            "dart"
+            "diff"
+            "dockerfile"
+            "eex"
+            "elixir"
+            "erlang"
+            "gitattributes"
+            "gitignore"
+            "git_config"
+            "git_rebase"
+            "heex"
+            "http"
+            "hurl"
+            "html"
+            "ini"
+            "javascript"
+            "typescript"
+            "jq"
+            "json"
+            "lua"
+            "nix"
+            "regex"
+            "ruby"
+            "scss"
+            "terraform"
+            "xml"
+            "yaml"
+            "markdown"
+            "markdown_inline"
+            "svelte"
+          ];
           indent.enable = true;
           incremental_selection = {
             enable = true;
@@ -152,6 +189,8 @@
           bashls.enable = true;
           dockerls.enable = true;
           nixd.enable = true;
+          ts_ls.enable = true;
+          svelte.enable = true;
           tailwindcss.enable = true;
           terraformls.enable = true;
           yamlls.enable = true;
