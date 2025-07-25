@@ -4,7 +4,7 @@
       {
         mode = "n";
         key = "<leader>ot";
-        action = ":ObsidianNewFromTemplate<CR>";
+        action = ":Obsidian new_from_template<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -15,7 +15,7 @@
       {
         mode = "n";
         key = "<leader>oo";
-        action = ":ObsidianOpen<CR>";
+        action = ":Obsidian open<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -25,7 +25,7 @@
       {
         mode = "n";
         key = "<leader>ob";
-        action = ":ObsidianBacklinks<CR>";
+        action = ":Obsidian backlinks<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -35,7 +35,7 @@
       {
         mode = "n";
         key = "<leader>oq";
-        action = ":ObsidianQuickSwitch<CR>";
+        action = ":Obsidian quick_switch<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -45,7 +45,7 @@
       {
         mode = "n";
         key = "<leader>ov";
-        action = ":ObsidianExtract<CR>";
+        action = ":Obsidian extract<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -55,7 +55,7 @@
       {
         mode = "n";
         key = "<leader>oi";
-        action = ":ObsidianPasteImg<CR>";
+        action = ":Obsidian paste_img<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -65,7 +65,7 @@
       {
         mode = "n";
         key = "<leader>or";
-        action = ":ObsidianRename<CR>";
+        action = ":Obsidian rename<CR>";
         options = {
           noremap = true;
           silent = true;
@@ -90,6 +90,8 @@
       obsidian = {
         enable = true;
         settings = {
+          legacy_commands = false;
+
           attachments = {
             img_folder = "assets/img";
           };
