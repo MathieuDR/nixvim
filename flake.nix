@@ -37,29 +37,28 @@
       }: let
         nixvimLib = nixvim.lib.${system};
         nixvim' = nixvim.legacyPackages.${system};
-        lexicalPackage =
-          (pkgs.lexical.override {
-            elixir = pkgs.beam.packages.erlang_25.elixir_1_15;
-          })
-          .overrideAttrs (old: {
-            # Remove the postInstall since we're using preFixup
-            postInstall = "";
-            preFixup = let
-              activate_version_manager = pkgs.writeScript "activate_version_manager.sh" ''
-                true
-              '';
-            in ''
-              substituteInPlace "$out/bin/start_lexical.sh" \
-                --replace-fail 'elixir_command=' 'elixir_command="${pkgs.beam.packages.erlang_27.elixir_1_17}/bin/"'
-              rm -f "$out/bin/activate_version_manager.sh"
-              ln -s ${activate_version_manager} "$out/bin/activate_version_manager.sh"
-
-              mv "$out/bin" "$out/libexec"
-
-              makeWrapper "$out/libexec/start_lexical.sh" "$out/bin/lexical" \
-                --set RELEASE_COOKIE lexical
-            '';
-          });
+        lexicalPackage = pkgs.lexical.override {
+          elixir = pkgs.beam.packages.erlang_27.elixir_1_17;
+        };
+        # .overrideAttrs (old: {
+        #   # Remove the postInstall since we're using preFixup
+        #   postInstall = "";
+        #   preFixup = let
+        #     activate_version_manager = pkgs.writeScript "activate_version_manager.sh" ''
+        #       true
+        #     '';
+        #   in ''
+        #     substituteInPlace "$out/bin/start_lexical.sh" \
+        #       --replace-fail 'elixir_command=' 'elixir_command="${pkgs.beam.packages.erlang_27.elixir_1_17}/bin/"'
+        #     rm -f "$out/bin/activate_version_manager.sh"
+        #     ln -s ${activate_version_manager} "$out/bin/activate_version_manager.sh"
+        #
+        #     mv "$out/bin" "$out/libexec"
+        #
+        #     makeWrapper "$out/libexec/start_lexical.sh" "$out/bin/lexical" \
+        #       --set RELEASE_COOKIE lexical
+        #   '';
+        # });
         # lexicalPackage = lexical.packages.${system}.default;
         # lexicalPackage = lexical.packages.${system}.default.override {
         #   elixir = pkgs.beam.packages.erlang_26.elixir_1_17;
