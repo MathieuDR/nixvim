@@ -185,6 +185,10 @@
               name = "personal";
               path = "~/notes/Obsidian";
             }
+            {
+              name = "drakkenheim";
+              path = "~/notes/drakkenheim";
+            }
           ];
         };
       };
