@@ -69,7 +69,27 @@
         options = {
           noremap = true;
           silent = true;
-          desc = "[O]bsidian [O]pen";
+          desc = "[O]bsidian [R]ename";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>ow";
+        action = ":Obsidian workspace<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+          desc = "[O]bsidian [W]orkspace";
+        };
+      }
+      {
+        mode = "n";
+        key = "<leader>of";
+        action = ":Obsidian follow_link<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+          desc = "[O]bsidian [F]ollow";
         };
       }
     ];
@@ -142,30 +162,30 @@
           '';
 
           #Register callbacks for note organization
-          callbacks.pre_write_note = ''
-            function(client, note)
-              -- Skip if no metadata or path
-              if not note.metadata or not note.metadata.path then
-                return
-              end
-
-              -- Get the specified path from metadata
-              local target_dir = note.metadata.path
-
-              -- Construct the new path
-              local new_path = client.dir / target_dir / note.path.name
-
-              if note.path:exists() then
-                note.path:rename(new_path)
-              end
-
-              -- Update the note's path
-              note.path = new_path
-
-              -- Remove path from metadata
-              note.metadata.path = nil
-            end
-          '';
+          # callbacks.pre_write_note = ''
+          #   function(client, note)
+          #     -- Skip if no metadata or path
+          #     if not note.metadata or not note.metadata.path then
+          #       return
+          #     end
+          #
+          #     -- Get the specified path from metadata
+          #     local target_dir = note.metadata.path
+          #
+          #     -- Construct the new path
+          #     local new_path = client.dir / target_dir / note.path.name
+          #
+          #     if note.path:exists() then
+          #       note.path:rename(new_path)
+          #     end
+          #
+          #     -- Update the note's path
+          #     note.path = new_path
+          #
+          #     -- Remove path from metadata
+          #     note.metadata.path = nil
+          #   end
+          # '';
 
           templates = {
             date_format = "%Y-%m-%d";
