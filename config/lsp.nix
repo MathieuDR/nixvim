@@ -7,6 +7,7 @@
         settings = {
           highlight.enable = true;
           ensureInstalled = [
+            "python"
             "go"
             "bash"
             "c_sharp"
@@ -200,6 +201,7 @@
           dartls.enable = true;
           gopls.enable = true;
           typst_lsp.enable = false;
+          pyright.enable = true;
           lexical = {
             enable = true;
             package = lexicalPackage;
