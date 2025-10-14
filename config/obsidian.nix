@@ -203,7 +203,7 @@
           workspaces = [
             {
               name = "personal";
-              path = "~/notes/Obsidian";
+              path = "~/notes/obsidian";
             }
             {
               name = "drakkenheim";
