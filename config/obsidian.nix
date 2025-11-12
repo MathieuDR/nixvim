@@ -133,7 +133,7 @@
             end
           '';
 
-          note_frontmatter_func = ''
+          frontmatter.func = ''
             function(note)
               if note.title then
                 note:add_alias(note.title)
