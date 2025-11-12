@@ -3,7 +3,7 @@
     oil.settings.enable = true;
     neo-tree = {
       enable = true;
-      eventHandlers = {
+      settings.event_handlers = {
         file_opened = ''
           function()
           	require("neo-tree").close_all()
