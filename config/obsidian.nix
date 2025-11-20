@@ -117,7 +117,7 @@
           };
 
           # Generate Zettelkasten-style IDs (YYMMDD-title format)
-          note_id_func = ''
+          note_id_func.__raw = ''
             function(title)
               local suffix = ""
               if title ~= nil then
@@ -133,7 +133,7 @@
             end
           '';
 
-          frontmatter.func = ''
+          frontmatter.func.__raw = ''
             function(note)
               if note.title then
                 note:add_alias(note.title)
