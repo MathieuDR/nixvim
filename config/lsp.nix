@@ -44,6 +44,7 @@
             "markdown"
             "markdown_inline"
             "svelte"
+            "zig"
           ];
           indent.enable = true;
           incremental_selection = {
@@ -208,6 +209,7 @@
             enable = true;
             package = lexicalPackage;
           };
+          zls.enable = true;
         };
         onAttach = ''
           -- Create a command `:Format` local to the LSP buffer
