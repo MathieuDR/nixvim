@@ -113,7 +113,7 @@
           legacy_commands = false;
 
           attachments = {
-            img_folder = "assets/img";
+            folder = "assets/img";
           };
 
           # Generate Zettelkasten-style IDs (YYMMDD-title format)
