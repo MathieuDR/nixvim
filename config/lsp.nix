@@ -1,4 +1,17 @@
-{lexicalPackage, ...}: {
+{
+  lexicalPackage,
+  pkgs,
+  ...
+}: let
+  snippetsDir = pkgs.stdenv.mkDerivation {
+    name = "yvim-snippets";
+    src = ./snippets;
+    installPhase = ''
+      mkdir -p $out
+      cp -r . $out/
+    '';
+  };
+in {
   config = {
     plugins = {
       ## Treesitter
@@ -166,7 +179,10 @@
 
       luasnip = {
         enable = true;
-        fromVscode = [{}];
+        fromVscode = [
+          {}
+          {paths = "${snippetsDir}";}
+        ];
       };
 
       friendly-snippets.enable = true;
@@ -290,5 +306,22 @@
         };
       };
     };
+
+    extraConfigLuaPost = ''
+      local ls = require("luasnip")
+      local s = ls.snippet
+      local t = ls.text_node
+      local f = ls.function_node
+
+      ls.add_snippets("markdown", {
+        s("bl", {
+          t("^"),
+          f(function()
+            math.randomseed(os.time())
+            return string.format("%06x", math.random(0, 0xFFFFFF))
+          end, {}),
+        }),
+      })
+    '';
   };
 }

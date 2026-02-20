@@ -54,6 +54,14 @@
           # Lets you run `nix run .` to start nixvim
           default = nvim;
           inherit lexicalPackage;
+          snippets = pkgs.stdenv.mkDerivation {
+            name = "yvim-snippets";
+            src = ./config/snippets;
+            installPhase = ''
+              mkdir -p $out
+              cp -r . $out/
+            '';
+          };
         };
 
         formatter = pkgs.alejandra;
