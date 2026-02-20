@@ -5,7 +5,7 @@
 }: let
   snippetsDir = pkgs.stdenv.mkDerivation {
     name = "yvim-snippets";
-    src = ./snippets;
+    src = ../snippets;
     installPhase = ''
       mkdir -p $out
       cp -r . $out/
@@ -136,7 +136,17 @@ in {
             "<C-d>" = "cmp.mapping.scroll_docs(-4)";
             "<C-f>" = "cmp.mapping.scroll_docs(4)";
             "<C-Space>" = "cmp.mapping.complete()";
-            "<CR>" = "cmp.mapping.confirm({behavior = cmp.ConfirmBehavior.Replace, select = true})";
+            "<CR>" = ''
+              cmp.mapping(function(fallback)
+                if cmp.visible() and cmp.get_selected_entry() then
+                  cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+                elseif require('luasnip').locally_jumpable(1) then
+                  require('luasnip').jump(1)
+                else
+                  fallback()
+                end
+              end, { "i", "s" })
+            '';
             "<Tab>" = ''
               cmp.mapping(function(fallback)
               	if cmp.visible() then

@@ -56,7 +56,7 @@
           inherit lexicalPackage;
           snippets = pkgs.stdenv.mkDerivation {
             name = "yvim-snippets";
-            src = ./config/snippets;
+            src = ./snippets;
             installPhase = ''
               mkdir -p $out
               cp -r . $out/
