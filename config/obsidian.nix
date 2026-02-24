@@ -81,7 +81,6 @@
           desc = "[O]bsidian [F]ollow";
         };
       }
-      # Step 1 of extract workflow: extract selection to new note (prompts for title → uses your id func)
       {
         mode = "v";
         key = "<leader>oe";
@@ -92,7 +91,6 @@
           desc = "[O]bsidian [E]xtract";
         };
       }
-      # Step 2: once in the new note, apply a template (thought/distilled → routes to slips/ via customizations)
       {
         mode = "n";
         key = "<leader>oT";
@@ -102,6 +100,53 @@
           silent = true;
           desc = "[O]bsidian insert [T]emplate";
         };
+      }
+    ];
+
+    autoGroups = {
+      obsidian_note_move = {
+        clear = true;
+      };
+    };
+
+    autoCmd = [
+      {
+        event = "User";
+        pattern = "ObsidianNoteWritePost";
+        group = "obsidian_note_move";
+        callback.__raw = ''
+          function(ev)
+            local note = require("obsidian.note").from_buffer(ev.buf)
+            if not note or not note.metadata or not note.metadata.path then
+              return
+            end
+
+            local client = require("obsidian").get_client()
+            local target_dir = note.metadata.path
+            local new_path = client.dir / target_dir / note.path.name
+
+            if tostring(note.path) == tostring(new_path) then
+              return
+            end
+
+            vim.fn.mkdir(tostring(client.dir / target_dir), "p")
+            vim.fn.rename(tostring(note.path), tostring(new_path))
+
+            vim.api.nvim_buf_set_name(ev.buf, tostring(new_path))
+
+            -- Remove the path: line from the buffer before writing
+            local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
+            local new_lines = vim.tbl_filter(function(line)
+              return not line:match("^path:%s*")
+            end, lines)
+            vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, new_lines)
+
+            vim.cmd("write")
+            vim.cmd("edit!")
+
+            vim.notify("Note moved to " .. tostring(new_path), vim.log.levels.INFO)
+          end
+        '';
       }
     ];
 
@@ -118,26 +163,28 @@
         }
       ];
 
-      obsidian = {
+      obsidian = let
+        zk_id_func = ''
+          function(title)
+            local suffix = ""
+            if title ~= nil then
+              suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+            else
+              for _ = 1, 4 do
+                suffix = suffix .. string.char(math.random(65, 90))
+              end
+            end
+            return tostring(os.time()) .. "-" .. suffix
+          end
+        '';
+      in {
         enable = true;
         settings = {
           legacy_commands = false;
 
           attachments.folder = "assets/img";
 
-          note_id_func.__raw = ''
-            function(title)
-              local suffix = ""
-              if title ~= nil then
-                suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-              else
-                for _ = 1, 4 do
-                  suffix = suffix .. string.char(math.random(65, 90))
-                end
-              end
-              return tostring(os.time()) .. "-" .. suffix
-            end
-          '';
+          note_id_func.__raw = zk_id_func;
 
           frontmatter = {
             sort = ["id" "title" "aliases" "tags" "created" "modified"];
@@ -182,12 +229,15 @@
             customizations = {
               fleeting = {
                 notes_subdir = "fleeting";
+                note_id_func.__raw = zk_id_func;
               };
               thought = {
                 notes_subdir = "slips";
+                note_id_func.__raw = zk_id_func;
               };
               distilled = {
                 notes_subdir = "slips";
+                note_id_func.__raw = zk_id_func;
               };
             };
           };
