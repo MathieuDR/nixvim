@@ -121,15 +121,14 @@
               return
             end
 
-            local client = require("obsidian").get_client()
             local target_dir = note.metadata.path
-            local new_path = client.dir / target_dir / note.path.name
+            local new_path = Obsidian.dir / target_dir / note.path.name
 
             if tostring(note.path) == tostring(new_path) then
               return
             end
 
-            vim.fn.mkdir(tostring(client.dir / target_dir), "p")
+            vim.fn.mkdir(tostring(Obsidian.dir / target_dir), "p")
             vim.fn.rename(tostring(note.path), tostring(new_path))
 
             vim.api.nvim_buf_set_name(ev.buf, tostring(new_path))
@@ -141,7 +140,7 @@
             end, lines)
             vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, new_lines)
 
-            vim.cmd("write")
+            vim.cmd("write!")
             vim.cmd("edit!")
 
             vim.notify("Note moved to " .. tostring(new_path), vim.log.levels.INFO)
