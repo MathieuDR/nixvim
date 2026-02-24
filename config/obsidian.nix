@@ -11,7 +11,6 @@
           desc = "[O]bsidian [T]emplate";
         };
       }
-
       {
         mode = "n";
         key = "<leader>oo";
@@ -40,16 +39,6 @@
           noremap = true;
           silent = true;
           desc = "[O]bsidian [Q]uickswitch";
-        };
-      }
-      {
-        mode = "n";
-        key = "<leader>ov";
-        action = ":Obsidian extract<CR>";
-        options = {
-          noremap = true;
-          silent = true;
-          desc = "[O]bsidian [E]xtract";
         };
       }
       {
@@ -92,6 +81,28 @@
           desc = "[O]bsidian [F]ollow";
         };
       }
+      # Step 1 of extract workflow: extract selection to new note (prompts for title → uses your id func)
+      {
+        mode = "v";
+        key = "<leader>oe";
+        action = ":Obsidian extract_note<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+          desc = "[O]bsidian [E]xtract";
+        };
+      }
+      # Step 2: once in the new note, apply a template (thought/distilled → routes to slips/ via customizations)
+      {
+        mode = "n";
+        key = "<leader>oT";
+        action = ":Obsidian template<CR>";
+        options = {
+          noremap = true;
+          silent = true;
+          desc = "[O]bsidian insert [T]emplate";
+        };
+      }
     ];
 
     plugins = {
@@ -112,19 +123,14 @@
         settings = {
           legacy_commands = false;
 
-          attachments = {
-            folder = "assets/img";
-          };
+          attachments.folder = "assets/img";
 
-          # Generate Zettelkasten-style IDs (YYMMDD-title format)
           note_id_func.__raw = ''
             function(title)
               local suffix = ""
               if title ~= nil then
-                -- Transform title into valid file name, matching your JS function
                 suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
               else
-                -- Add 4 random uppercase letters if no title
                 for _ = 1, 4 do
                   suffix = suffix .. string.char(math.random(65, 90))
                 end
@@ -133,73 +139,61 @@
             end
           '';
 
-          frontmatter.func.__raw = ''
-            function(note)
-              if note.title then
-                note:add_alias(note.title)
-              end
+          frontmatter = {
+            sort = ["id" "title" "aliases" "tags" "created" "modified"];
+            func.__raw = ''
+              function(note)
+                if note.title then
+                  note:add_alias(note.title)
+                end
 
-              local out = {
-                id = note.id,
-                title = note.title,
-                created = os.date("%Y-%m-%d %H:%M"),
-                modified = os.date("%Y-%m-%d %H:%M"),
-                aliases = note.aliases,
-                tags = note.tags
-              }
+                local out = {
+                  id = note.id,
+                  title = note.title,
+                  created = os.date("%Y-%m-%d %H:%M"),
+                  modified = os.date("%Y-%m-%d %H:%M"),
+                  aliases = note.aliases,
+                  tags = note.tags,
+                }
 
-              -- Preserve any existing metadata
-              if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-                for k, v in pairs(note.metadata) do
-                  if k ~= "path" and k ~="modified" then  -- Skip the path since we already handled it
-                    out[k] = v
+                if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+                  for k, v in pairs(note.metadata) do
+                    if k ~= "path" and k ~= "modified" then
+                      out[k] = v
+                    end
                   end
                 end
+
+                return out
               end
-
-              return out
-            end
-          '';
-
-          #Register callbacks for note organization
-          # callbacks.pre_write_note = ''
-          #   function(client, note)
-          #     -- Skip if no metadata or path
-          #     if not note.metadata or not note.metadata.path then
-          #       return
-          #     end
-          #
-          #     -- Get the specified path from metadata
-          #     local target_dir = note.metadata.path
-          #
-          #     -- Construct the new path
-          #     local new_path = client.dir / target_dir / note.path.name
-          #
-          #     if note.path:exists() then
-          #       note.path:rename(new_path)
-          #     end
-          #
-          #     -- Update the note's path
-          #     note.path = new_path
-          #
-          #     -- Remove path from metadata
-          #     note.metadata.path = nil
-          #   end
-          # '';
+            '';
+          };
 
           templates = {
             date_format = "%Y-%m-%d";
-            subdir = "assets/templates/nvim";
+            folder = "assets/templates/nvim";
             substitutions = {
-              datetime = ''
+              datetime.__raw = ''
                 function()
                   return os.date("%Y-%m-%d %H:%M")
                 end
               '';
             };
+            customizations = {
+              fleeting = {
+                notes_subdir = "fleeting";
+              };
+              thought = {
+                notes_subdir = "slips";
+              };
+              distilled = {
+                notes_subdir = "slips";
+              };
+            };
           };
 
           ui.enable = false;
+
           workspaces = [
             {
               name = "personal";
