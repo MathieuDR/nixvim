@@ -124,7 +124,18 @@
             local target_dir = note.metadata.path
             local new_path = Obsidian.dir / target_dir / note.path.name
 
+            local function strip_path_frontmatter()
+              local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
+              local new_lines = vim.tbl_filter(function(line)
+                return not line:match("^path:%s*")
+              end, lines)
+              vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, new_lines)
+              vim.cmd("write!")
+              vim.cmd("edit!")
+            end
+
             if tostring(note.path) == tostring(new_path) then
+              strip_path_frontmatter()
               return
             end
 
@@ -133,15 +144,7 @@
 
             vim.api.nvim_buf_set_name(ev.buf, tostring(new_path))
 
-            -- Remove the path: line from the buffer before writing
-            local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
-            local new_lines = vim.tbl_filter(function(line)
-              return not line:match("^path:%s*")
-            end, lines)
-            vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, new_lines)
-
-            vim.cmd("write!")
-            vim.cmd("edit!")
+            strip_path_frontmatter()
 
             vim.notify("Note moved to " .. tostring(new_path), vim.log.levels.INFO)
           end
