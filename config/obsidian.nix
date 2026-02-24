@@ -103,55 +103,6 @@
       }
     ];
 
-    autoGroups = {
-      obsidian_note_move = {
-        clear = true;
-      };
-    };
-
-    autoCmd = [
-      {
-        event = "User";
-        pattern = "ObsidianNoteWritePost";
-        group = "obsidian_note_move";
-        callback.__raw = ''
-          function(ev)
-            local note = require("obsidian.note").from_buffer(ev.buf)
-            if not note or not note.metadata or not note.metadata.path then
-              return
-            end
-
-            local target_dir = note.metadata.path
-            local new_path = Obsidian.dir / target_dir / note.path.name
-
-            local function strip_path_frontmatter()
-              local lines = vim.api.nvim_buf_get_lines(ev.buf, 0, -1, false)
-              local new_lines = vim.tbl_filter(function(line)
-                return not line:match("^path:%s*")
-              end, lines)
-              vim.api.nvim_buf_set_lines(ev.buf, 0, -1, false, new_lines)
-              vim.cmd("write!")
-              vim.cmd("edit!")
-            end
-
-            if tostring(note.path) == tostring(new_path) then
-              strip_path_frontmatter()
-              return
-            end
-
-            vim.fn.mkdir(tostring(Obsidian.dir / target_dir), "p")
-            vim.fn.rename(tostring(note.path), tostring(new_path))
-
-            vim.api.nvim_buf_set_name(ev.buf, tostring(new_path))
-
-            strip_path_frontmatter()
-
-            vim.notify("Note moved to " .. tostring(new_path), vim.log.levels.INFO)
-          end
-        '';
-      }
-    ];
-
     plugins = {
       image = {
         enable = false;
@@ -217,6 +168,22 @@
               end
             '';
           };
+
+          callbacks.pre_write_note.__raw = ''
+            function(note)
+              if not note.metadata or not note.metadata.path then
+                return
+              end
+
+              local target_dir = note.metadata.path
+              local new_path = Obsidian.dir / target_dir / note.path.name
+
+              vim.fn.mkdir(tostring(Obsidian.dir / target_dir), "p")
+
+              note.path = new_path
+              note.metadata.path = nil
+            end
+          '';
 
           templates = {
             date_format = "%Y-%m-%d";
