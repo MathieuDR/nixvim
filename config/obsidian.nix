@@ -205,7 +205,7 @@
 
                 if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
                   for k, v in pairs(note.metadata) do
-                    if k ~= "path" and k ~= "modified" then
+                    if k ~= "modified" then
                       out[k] = v
                     end
                   end
